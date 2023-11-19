@@ -10,7 +10,15 @@
       <div class="px-1" v-if="before !== null">
         <mult-stat :hide-prefix="hidePrefix" :mult="name" :type="type" :value="before"></mult-stat>
       </div>
-      <v-icon small v-if="before !== null && after !== null">mdi-transfer-right</v-icon>
+      <gb-tooltip v-if="alwaysRelative" :min-width="25">
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon small v-if="before !== null && after !== null" v-bind="attrs" v-on="on">mdi-transfer-right</v-icon>
+        </template>
+        <mult-stat :mult="name" :type="type" :value="relativeValue"></mult-stat>
+      </gb-tooltip>
+      <span v-else>
+        <v-icon small v-if="before !== null && after !== null">mdi-transfer-right</v-icon>
+      </span>
       <div class="pl-1" v-if="after !== null">
         <mult-stat :hide-prefix="hidePrefix" :mult="name" :type="type" :value="after"></mult-stat>
       </div>
@@ -38,6 +46,9 @@ export default {
     },
     relativeValue() {
       return this.before === null ? this.after : (this.after === null ? this.before : (this.type === 'mult' ? (this.after / this.before) : (this.after - this.before)));
+    },
+    alwaysRelative() {
+      return this.$store.state.system.settings.experiment.items.alwaysRelative.value;
     },
     featureIcon() {
       if (!this.isSimple && this.$store.state.mult.items[this.name]) {

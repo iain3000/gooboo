@@ -366,6 +366,13 @@ export default {
                         type: 'switch',
                         value: false,
                         defaultValue: false
+                    },
+                    alwaysRelative: {
+                        unlock: null,
+                        hasDescription: true,
+                        type: 'switch',
+                        value: false,
+                        defaultValue: false
                     }
                 }
             }

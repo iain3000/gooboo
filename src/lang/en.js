@@ -1175,6 +1175,10 @@ export default {
       currencyLabel: {
         name: 'Show currency labels',
         description: 'Display currency gain and time until you reach capacity without needing to hover'
+      },
+      alwaysRelative: {
+        name: 'Always show relative upgrade stats',
+        description: 'Display relative upgrade stats in a tooltip on the arrow in the before/after stats'
       }
     }
   },
